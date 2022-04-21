@@ -1,0 +1,14 @@
+DROP TABLE users;
+CREATE TABLE users (
+    id INTEGER AUTO_INCREMENT,
+    username TEXT NOT NULL UNIQUE
+);
+
+DROP TABLE books;
+CREATE TABLE books (
+    id INTEGER AUTO_INCREMENT,
+    title TEXT NOT NULL,
+    author TEXT NOT NULL,
+    quantity INTEGER NOT NULL
+);
+
