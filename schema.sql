@@ -12,3 +12,22 @@ CREATE TABLE books (
     quantity INTEGER NOT NULL
 );
 
+DROP TABLE request_books;
+CREATE TABLE request_books (
+    user_id INTEGER,
+    book_id INTEGER,
+    book_title TEXT NOT NULL,
+    book_status BOOL DEFAULT 'f'  
+);
+
+DROP TABLE books_borrowed;
+CREATE TABLE books_borrowed (
+    user_id INTEGER NOT NULL,
+    book_id INTEGER NOT NULL,
+    book_title TEXT NOT NULL,
+    renewal_date varchar(10),
+    renewal_status BOOL DEFAULT 'f',
+    return_status BOOL DEFAULT 'f',
+    late_fee INTEGER
+);
+
