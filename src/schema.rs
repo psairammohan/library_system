@@ -8,7 +8,7 @@ mod schema {
         }
     }
     table! {
-        book {
+        books {
             id -> Integer,
             title -> Text,
             author -> Text,
@@ -16,7 +16,7 @@ mod schema {
         }
     }
     table! {
-        request_books{
+        request_books (user_id, book_id) {
             user_id -> Integer,
             book_id -> Integer,
             book_title -> Text,
@@ -24,7 +24,7 @@ mod schema {
         }
     }
     table! {
-        books_borrowed{
+        books_borrowed (user_id, book_id) {
             user_id -> Integer,
             book_id -> Integer,
             book_title -> Text,
@@ -37,16 +37,18 @@ mod schema {
 }
 
 use self::schema::users;
-use self::schema::book;
+use self::schema::books;
 use self::schema::request_books;
 use self::schema::books_borrowed;
 
+#[table_name = "users"]
 #[derive(Queryable, Insertable, Debug)]
 pub struct User {
     pub id: i32,
     pub username: String,
 }
 
+#[table_name = "books"]
 #[derive(Queryable, Insertable, Debug)]
 pub struct Book {
     pub id: i32,
@@ -55,16 +57,18 @@ pub struct Book {
     pub quantity: i32,
 }
 
+#[table_name = "request_books"]
 #[derive(Queryable, Insertable, Debug)]
-pub struct request_books{
+pub struct request_book {
     pub user_id: i32,
     pub book_id: i32,
     pub book_title: String,
     pub book_status: Bool,
 }
 
+#[table_name = "books_borrowed"]
 #[derive(Queryable, Debug)]
-pub struct books_borrowed{
+pub struct book_borrowed {
     pub user_id: i32,
     pub book_id: i32,
     pub book_title: String,
@@ -73,3 +77,8 @@ pub struct books_borrowed{
     pub return_status: Bool,
     pub late_fee: i32,
 }
+
+use self::schema::request_books::dsl::request_books as all_request_books;
+
+
+
